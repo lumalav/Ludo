@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Ludo</title>	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/73/three.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/12/Tween.min.js"></script>
-	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="events.js"></script>
+    <title>Ludo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/73/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/12/Tween.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="events.js"></script>
     <style>
-        html { overflow-y: hidden; overflow-x: hidden;}
-        span { font-weight: bolder; font-size: 15px; }
-    </style>  
-	<script src="app.js"></script>
+        html {
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+        span {
+            font-weight: bolder;
+            font-size: 15px;
+        }
+    </style>
+    <script src="app.js"></script>
 </head>
+
 <body>
     <div id="myModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button id="closeInstructions" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><span>LUDO!</span> Instructions</h4>
+                    <button id="closeInstructions" type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><span>LUDO!</span> Instructions</h4>
                 </div>
                 <div class="modal-body">
                     <p>Select <span>your</span> color</p>
-                    <button id="playerGreenB" type="button" class="btn btn-success" >Green</button>
+                    <button id="playerGreenB" type="button" class="btn btn-success">Green</button>
                     <button id="playerRedB" type="button" class="btn btn-danger">Red</button>
                     <button id="playerBlueB" type="button" class="btn btn-primary">Blue</button>
                     <button id="playerYellowB" type="button" class="btn btn-warning">Yellow</button>
@@ -37,21 +47,25 @@
                     <button id="enemyBlueB" type="button" class="btn btn-primary">Blue</button>
                     <button id="enemyYellowB" type="button" class="btn btn-warning">Yellow</button>
                     <p></p>
-                    <p>Throw the <button id="fakeDice" class="btn btn-default"><span>Dice</span></button>, and select a piece of the color <span>you</span> chose to move on the board</p>
-                    <p>If all your pieces reach the end,</p> 
+                    <p>Throw the <button id="fakeDice" class="btn btn-default"><span>Dice</span></button>, and select a
+                        piece of the color <span>you</span> chose to move on the board</p>
+                    <p>If all your pieces reach the end,</p>
                     <p style="margin-left: 20px;"><span>you win!</span></p>
-                    <p>If a piece of the <span>enemy</span> steps on one of your pieces,</p> 
+                    <p>If a piece of the <span>enemy</span> steps on one of your pieces,</p>
                     <p style="margin-left: 20px;"><span>your</span> piece will return to the start position!</p>
-                    <p>If <span>your</span> piece steps on one of the enemy's pieces,</p> 
+                    <p>If <span>your</span> piece steps on one of the enemy's pieces,</p>
                     <p style="margin-left: 20px;"><span>his</span> piece will return to the start position!</p>
-                    <p>If you get tired of the <span style="font-style: italic;">awesome</span> tune,</p> 
-                    <p style="margin-left: 20px;"><span>you</span> can always click <button type="button" class="btn btn-default" aria-label="music">
-                    <span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button> to pause it</p>   
+                    <p>If you get tired of the <span style="font-style: italic;">awesome</span> tune,</p>
+                    <p style="margin-left: 20px;"><span>you</span> can always click <button type="button"
+                            class="btn btn-default" aria-label="music">
+                            <span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button> to pause it</p>
                     <p><span>Have fun!</span></p>
                 </div>
-                <div  id="closeInstructions" class="modal-footer">
-                    <button id="closeInstructions2" type="button" class="btn btn-default" data-dismiss="modal">Play!</button>
-                    <button id="goBack2" type="button" class="btn btn-default" data-dismiss="modal">Take me out of here!</button>
+                <div id="closeInstructions" class="modal-footer">
+                    <button id="closeInstructions2" type="button" class="btn btn-default"
+                        data-dismiss="modal">Play!</button>
+                    <button id="goBack2" type="button" class="btn btn-default" data-dismiss="modal">Take me out of
+                        here!</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -60,40 +74,46 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button id="goBack1" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><span>You Won!</span></h4>
+                    <button id="goBack1" type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><span>You Won!</span></h4>
                 </div>
-                <div class="modal-body">                   
+                <div class="modal-body">
                     <p><span>Wanna try again?</span></p>
                 </div>
                 <div class="modal-footer">
-                    <button onclick="location.reload();" type="button" class="btn btn-default" data-dismiss="modal">Yes!</button>
+                    <button onclick="location.reload();" type="button" class="btn btn-default"
+                        data-dismiss="modal">Yes!</button>
                     <button id="goBack2" type="button" class="btn btn-default" data-dismiss="modal">No!</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal --> 
+    </div><!-- /.modal -->
     <div id="myLoseModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button id="goBack4" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><span>You Lost!</span></h4>
+                    <button id="goBack4" type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><span>You Lost!</span></h4>
                 </div>
-                <div class="modal-body">                   
+                <div class="modal-body">
                     <p><span>Wanna try again?</span></p>
                 </div>
                 <div class="modal-footer">
-                    <button onclick="location.reload();" type="button" class="btn btn-default" data-dismiss="modal">Yes!</button>
+                    <button onclick="location.reload();" type="button" class="btn btn-default"
+                        data-dismiss="modal">Yes!</button>
                     <button id="goBack3" type="button" class="btn btn-default" data-dismiss="modal">No!</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal --> 
+    </div><!-- /.modal -->
     <div class="row">
         <div class="col-xs-6">
-            <button id="dice" class="btn btn-default" onclick="throwDice()"><span>Dice</span></button> <span>=</span> <span id="result">0</span>
-            <span id="playerTeam" style="visibility: hidden;"></span><span id="enemyTeam" style="visibility: hidden;"></span>
+            <button id="dice" class="btn btn-default" onclick="throwDice()"><span>Dice</span></button> <span>=</span>
+            <span id="result">0</span>
+            <span id="playerTeam" style="visibility: hidden;"></span><span id="enemyTeam"
+                style="visibility: hidden;"></span>
         </div>
         <div class="col-xs-6" align="right">
             <button id="music" type="button" onclick="changeMusic()" class="btn btn-default" aria-label="music">
@@ -102,4 +122,5 @@
         </div>
     </div>
 </body>
+
 </html>
